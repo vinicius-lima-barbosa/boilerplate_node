@@ -25,6 +25,24 @@ export async function authController(app: FastifyInstance) {
     }
   });
 
+  app.get('/verify-email', async (request, reply) => {
+    try {
+      const { token } = request.query as { token: string };
+      if (!token) {
+        reply.status(400).send({ message: 'Token is required' });
+      }
+
+      const user = await service.verifyEmail(token);
+
+      reply.status(200).send({
+        message: 'Email verified successfully',
+        user
+      });
+    } catch (error) {
+      throw error;
+    }
+  });
+
   app.post('/login', { schema: LoginSchema }, async (request, reply) => {
     try {
       const dto = app.validate<LoginUserDto>(LoginUserSchema, request.body);
