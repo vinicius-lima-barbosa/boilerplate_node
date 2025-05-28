@@ -22,7 +22,7 @@ export class AuthService {
     const token = this.app.jwt.sign({ id: user.id }, { expiresIn: '1d' });
 
     const verificationLink = `${this.app.config.APP_URL}/verify-email?token=${token}`;
-    await sendEmailVerification(user.email, verificationLink);
+    await sendEmailVerification(this.app, user.email, verificationLink);
 
     return user;
   }
