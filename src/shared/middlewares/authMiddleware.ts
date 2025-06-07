@@ -33,6 +33,7 @@ export const sendEmailVerification = async (
     to: email,
     replyTo: SMTP_USER,
     subject: 'Confirm your email',
-    text: `Click the link to confirm your email: ${link}`
+    text: `Click the link to confirm your email.`,
+    html: `<p>Click the link to confirm your email: <a href="${link}">Link para Confirmar o Email</a></p>`
   });
 };
