@@ -34,6 +34,8 @@ export const sendEmailVerification = async (
     replyTo: SMTP_USER,
     subject: 'Confirm your email',
     text: `Click the link to confirm your email.`,
+    // O ideal seria enviar o link para a página de Login e então dar um GET na rota de confirmação de Email.
+    // Mas por enquanto, vamos enviar o link direto para a confirmação.
     html: `<p>Click the link to confirm your email: <a href="${link}">Link para Confirmar o Email</a></p>`
   });
 };
