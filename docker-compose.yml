@@ -6,7 +6,7 @@ services:
     container_name: boilerplate_db
     restart: always
     ports:
-      - '5433:5432'
+      - '5432:5432'
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -27,8 +27,9 @@ services:
     depends_on:
       - db
     environment:
-      NODE_ENV: development
       DATABASE_URL: postgresql://postgres:postgres@db:5432/boilerplate_db?schema=public
+    env_file:
+      - .env
     networks:
       - boilerplate_network
 
