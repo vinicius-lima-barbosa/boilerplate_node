@@ -49,8 +49,10 @@ export class AuthService {
     const user = await this.app.prisma.user.findUnique({
       where: { email: payload.email }
     });
-    if (!user || !user.emailVerified)
-      throw new HttpError(401, 'Invalid credentials');
+    if (!user) throw new HttpError(401, 'Invalid credentials');
+
+    if (!user.emailVerified)
+      throw new HttpError(401, 'Please verify your email before logging in');
 
     const isValid = await bcrypt.compare(payload.password, user.password);
     if (!isValid) throw new HttpError(401, 'Invalid credentials');
