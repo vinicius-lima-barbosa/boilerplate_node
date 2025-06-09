@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify';
-import { registerEnv } from './env';
-import { swaggerConfig } from './swagger';
-import { registerPrisma } from './prismaClient';
+import { registerEnv } from './env/env';
+import { swaggerConfig } from './swagger/swagger';
+import { registerPrisma } from './prisma-client/prismaClient';
 
 export class ConfigLoader {
   public app: FastifyInstance;

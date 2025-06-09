@@ -1,4 +1,4 @@
-import { EnvSchema } from '@config/env';
+import { EnvSchema } from '@config/env/env';
 import { PrismaClient } from '@prisma/client';
 import { z } from 'zod';
 import 'fastify';
