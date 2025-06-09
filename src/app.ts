@@ -31,11 +31,11 @@ export class App {
       }
     });
 
-    // Register Middlwares
+    // Register Middlewares
     const validatorMiddleware = new Validator(this.app);
     validatorMiddleware.register();
 
-    // Register Erro Handlers
+    // Register Error Handlers
     const errorHandlerMiddleware = new ErrorHandler(this.app);
     errorHandlerMiddleware.register();
 
