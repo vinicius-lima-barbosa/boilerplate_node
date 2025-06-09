@@ -1,7 +1,8 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import RegisterUserDto, { RegisterUserSchema } from '../dtos/registerUserDto';
+// import RegisterUserDto, { RegisterUserSchema } from '../dtos/registerUserDto';
 import { AuthService } from '../services/AuthService';
-import LoginUserDto, { LoginUserSchema } from '../dtos/loginUserDto';
+// import LoginUserDto, { LoginUserSchema } from '../dtos/loginUserDto';
+import { AuthDto, LoginDto, RegisterDto } from '../dtos/AuthDto';
 
 export class AuthController {
   private service: AuthService;
@@ -12,8 +13,8 @@ export class AuthController {
 
   public register = async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const dto = this.app.validate<RegisterUserDto>(
-        RegisterUserSchema,
+      const dto = this.app.validate<RegisterDto>(
+        AuthDto.registerSchema,
         request.body
       );
       const user = await this.service.register(dto);
@@ -44,8 +45,8 @@ export class AuthController {
 
   public login = async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const dto = this.app.validate<LoginUserDto>(
-        LoginUserSchema,
+      const dto = this.app.validate<LoginDto>(
+        AuthDto.loginSchema,
         request.body
       );
       const token = await this.service.login(dto);
