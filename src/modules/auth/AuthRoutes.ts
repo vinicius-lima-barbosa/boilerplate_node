@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import { AuthController } from './controllers/authController';
+import { AuthController } from './controllers/AuthController';
 import { RegisterUserSchema } from './dtos/registerUserDto';
 import { LoginSchema, LogoutSchema } from './schemas/authSchemas';
 

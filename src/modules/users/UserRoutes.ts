@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify';
-import { UserController } from './controllers/userController';
-import { AuthMiddleware } from '@shared/middlewares/authMiddleware';
+import { UserController } from './controllers/UserController';
+import { AuthMiddleware } from '@shared/middlewares/AuthMiddleware';
 import {
   DeleteUserSchema,
   EditUserByIdSchema,

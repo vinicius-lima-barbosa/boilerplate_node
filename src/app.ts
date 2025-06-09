@@ -3,10 +3,10 @@ import sensible from 'fastify-sensible';
 import jwt from '@fastify/jwt';
 import fastifyCookie from '@fastify/cookie';
 import { ConfigLoader } from './config';
-import { ErrorHandler } from './shared/errors/errorHandler';
-import { Validator } from './shared/middlewares/validator';
-import { UserRoutes } from './modules/users/routes';
-import { AuthRoutes } from './modules/auth/routes';
+import { ErrorHandler } from './shared/errors/ErrorHandler';
+import { Validator } from './shared/middlewares/Validator';
+import { UserRoutes } from './modules/users/UserRoutes';
+import { AuthRoutes } from './modules/auth/AuthRoutes';
 
 export class App {
   public app: FastifyInstance;

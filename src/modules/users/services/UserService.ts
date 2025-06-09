@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify';
 import EditUserDto from '../dtos/editUserDto';
-import { HttpError } from '../../../shared/errors/httpError';
+import { HttpError } from '../../../shared/errors/HttpError';
 
 export class UserService {
   constructor(private app: FastifyInstance) {}

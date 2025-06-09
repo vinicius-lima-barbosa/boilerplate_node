@@ -1,9 +1,9 @@
 import { FastifyInstance } from 'fastify';
 import RegisterUserDto from '../dtos/registerUserDto';
-import { HttpError } from '../../../shared/errors/httpError';
+import { HttpError } from '../../../shared/errors/HttpError';
 import bcrypt from 'bcrypt';
 import LoginDto from '../dtos/loginUserDto';
-import { AuthMiddleware } from '../../../shared/middlewares/authMiddleware';
+import { AuthMiddleware } from '../../../shared/middlewares/AuthMiddleware';
 
 export class AuthService {
   constructor(private app: FastifyInstance) {}

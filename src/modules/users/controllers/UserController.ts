@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import { UserService } from '../services/userService';
+import { UserService } from '../services/UserService';
 import EditUserDto, { EditUserSchema } from '../dtos/editUserDto';
 
 export class UserController {

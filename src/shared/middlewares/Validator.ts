@@ -1,4 +1,4 @@
-import { HttpError } from '../errors/httpError';
+import { HttpError } from '../errors/HttpError';
 import { FastifyInstance } from 'fastify';
 import { ZodSchema } from 'zod';
 

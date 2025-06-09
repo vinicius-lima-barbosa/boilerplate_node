@@ -1,5 +1,5 @@
 import { FastifyError, FastifyInstance } from 'fastify';
-import { HttpError } from './httpError';
+import { HttpError } from './HttpError';
 
 export class ErrorHandler {
   private app: FastifyInstance;
