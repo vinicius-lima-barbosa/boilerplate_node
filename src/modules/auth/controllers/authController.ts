@@ -1,38 +1,37 @@
-import { FastifyInstance } from 'fastify';
+import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import RegisterUserDto, { RegisterUserSchema } from '../dtos/registerUserDto';
 import { AuthService } from '../services/authService';
 import LoginUserDto, { LoginUserSchema } from '../dtos/loginUserDto';
-import {
-  LoginSchema,
-  LogoutSchema,
-  RegisterSchema
-} from '../schemas/authSchemas';
 
-export async function authController(app: FastifyInstance) {
-  const service = new AuthService(app);
+export class AuthController {
+  private service: AuthService;
 
-  app.post('/register', { schema: RegisterSchema }, async (request, reply) => {
+  constructor(private readonly app: FastifyInstance) {
+    this.service = new AuthService(this.app);
+  }
+
+  public register = async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const dto = app.validate<RegisterUserDto>(
+      const dto = this.app.validate<RegisterUserDto>(
         RegisterUserSchema,
         request.body
       );
-      const user = await service.register(dto);
+      const user = await this.service.register(dto);
 
       reply.status(200).send({ message: 'Succesfuly registed', user });
     } catch (error) {
       throw error;
     }
-  });
+  };
 
-  app.get('/verify-email', async (request, reply) => {
+  public verifyEmail = async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       const { token } = request.query as { token: string };
       if (!token) {
         reply.status(400).send({ message: 'Token is required' });
       }
 
-      const user = await service.verifyEmail(token);
+      const user = await this.service.verifyEmail(token);
 
       reply.status(200).send({
         message: 'Email verified successfully',
@@ -41,12 +40,15 @@ export async function authController(app: FastifyInstance) {
     } catch (error) {
       throw error;
     }
-  });
+  };
 
-  app.post('/login', { schema: LoginSchema }, async (request, reply) => {
+  public login = async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const dto = app.validate<LoginUserDto>(LoginUserSchema, request.body);
-      const token = await service.login(dto);
+      const dto = this.app.validate<LoginUserDto>(
+        LoginUserSchema,
+        request.body
+      );
+      const token = await this.service.login(dto);
 
       reply.setCookie('token', token, {
         path: '/',
@@ -63,14 +65,14 @@ export async function authController(app: FastifyInstance) {
     } catch (error) {
       throw error;
     }
-  });
+  };
 
-  app.post('/logout', { schema: LogoutSchema }, async (_request, reply) => {
+  public logout = async (_request: FastifyRequest, reply: FastifyReply) => {
     try {
       reply.clearCookie('token', { path: '/' });
       reply.status(200).send({ message: 'Logout successful' });
     } catch (error) {
       throw error;
     }
-  });
+  };
 }
