@@ -16,7 +16,7 @@ export class App {
   }
 
   public async initialize() {
-    // Load Codnig, Environment variables and Prisma Client
+    // Load Config, Environment variables and Prisma Client
     const configLoader = new ConfigLoader(this.app);
     await configLoader.load();
 
