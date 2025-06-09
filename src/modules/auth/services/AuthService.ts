@@ -1,9 +1,9 @@
 import { FastifyInstance } from 'fastify';
 import RegisterUserDto from '../dtos/registerUserDto';
-import { HttpError } from '../../../shared/errors/httpError';
+import { HttpError } from '../../../shared/errors/HttpError';
 import bcrypt from 'bcrypt';
 import LoginDto from '../dtos/loginUserDto';
-import { sendEmailVerification } from '../../../shared/middlewares/authMiddleware';
+import { AuthMiddleware } from '../../../shared/middlewares/AuthMiddleware';
 
 export class AuthService {
   constructor(private app: FastifyInstance) {}
@@ -22,7 +22,8 @@ export class AuthService {
     const token = this.app.jwt.sign({ id: user.id }, { expiresIn: '1d' });
 
     const verificationLink = `${this.app.config.APP_URL}/verify-email?token=${token}`;
-    await sendEmailVerification(this.app, user.email, verificationLink);
+    const authMiddleware = new AuthMiddleware(this.app);
+    await authMiddleware.sendEmailVerification(user.email, verificationLink);
 
     return user;
   }
