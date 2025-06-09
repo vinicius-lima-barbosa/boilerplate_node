@@ -1,7 +1,10 @@
 import { FastifyInstance } from 'fastify';
 import { AuthController } from './controllers/AuthController';
-import { RegisterUserSchema } from './dtos/registerUserDto';
-import { LoginSchema, LogoutSchema } from './schemas/authSchemas';
+import {
+  LoginSchema,
+  LogoutSchema,
+  RegisterSchema
+} from './schemas/authSchemas';
 
 export class AuthRoutes {
   private controller: AuthController;
@@ -13,7 +16,7 @@ export class AuthRoutes {
   public register() {
     this.app.post(
       '/auth/register',
-      { schema: RegisterUserSchema },
+      { schema: RegisterSchema },
       this.controller.register
     );
     this.app.get('/auth/verify-email', this.controller.verifyEmail);
@@ -22,7 +25,7 @@ export class AuthRoutes {
       { schema: LoginSchema },
       this.controller.login
     );
-    this.app.get(
+    this.app.post(
       '/auth/logout',
       { schema: LogoutSchema },
       this.controller.logout
