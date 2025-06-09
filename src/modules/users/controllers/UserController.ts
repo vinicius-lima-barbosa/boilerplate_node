@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { UserService } from '../services/UserService';
-import EditUserDto, { EditUserSchema } from '../dtos/editUserDto';
+import { EditUserDto, UserDto } from '../dtos/UserDto';
 
 export class UserController {
   private service: UserService;
@@ -31,7 +31,10 @@ export class UserController {
   public editUser = async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       const { id } = request.params as { id: string };
-      const dto = this.app.validate<EditUserDto>(EditUserSchema, request.body);
+      const dto = this.app.validate<EditUserDto>(
+        UserDto.editUserSchema,
+        request.body
+      );
       const user = await this.service.editUser(id, dto);
       reply.status(200).send(user);
     } catch (error) {
