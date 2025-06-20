@@ -1,14 +1,13 @@
 import { FastifyInstance } from 'fastify';
-import RegisterUserDto from '../dtos/registerUserDto';
+import { RegisterDto, LoginDto } from '../dtos/AuthDto';
 import { HttpError } from '../../../shared/errors/HttpError';
 import bcrypt from 'bcrypt';
-import LoginDto from '../dtos/loginUserDto';
 import { AuthMiddleware } from '../../../shared/middlewares/AuthMiddleware';
 
 export class AuthService {
   constructor(private app: FastifyInstance) {}
 
-  async register(payload: RegisterUserDto) {
+  async register(payload: RegisterDto) {
     const existing = await this.app.prisma.user.findUnique({
       where: { email: payload.email }
     });
