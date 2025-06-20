@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import EditUserDto from '../dtos/editUserDto';
+import { EditUserDto } from '../dtos/UserDto';
 import { HttpError } from '../../../shared/errors/HttpError';
 
 export class UserService {
